@@ -101,7 +101,13 @@ userInput.setAttribute("type", "text");
 userInput.placeholder = "Type your phrase";
 const hint = document.createElement("p")
 const result = document.createElement("p")
+let guessNum = 6;
+hint.textContent = "hint";
+// result.textContent = "good job"
+
 game.appendChild(userInput)
+game.appendChild(hint)
+game.appendChild(result)
 
 // const card1 = getElementById("card1");
 
@@ -115,13 +121,23 @@ function guessPhrase(){
     const userGuess = userInput.value;
 
     if(checkGuess(userGuess)){
-        console.log("congragualtion you guessed the phrase")
+        // console.log("congragualtion you guessed the phrase")
+        result.textContent = "congragualtion you guessed the phrase"
     }else{
         guessNum --;
         if(guessNum == 0){
-            console.log(`getting closer. you have ${guessNum} guess left`)
-
+            // console.log("Sorry you have reached max attemps")
+            result.textContent = "Sorry you have reached max attemps"
+        }else{
+            // console.log(`getting closer. you have ${guessNum} guess left`);
+            result.textContent = `getting closer. you have ${guessNum} guess left`
         }
     }
+    userInput.value = ""
 }
-// console.log("Sorry you have reached max attemps")
+// event handler for submmiting user input
+userInput.addEventListener("keypress", function(e){
+    if(e.key == "Enter"){
+        guessPhrase();
+    }
+})
