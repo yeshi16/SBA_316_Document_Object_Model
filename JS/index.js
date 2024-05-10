@@ -73,27 +73,12 @@ return dropdown.options[randomIndex].value
 11 – 3D movie
 12 – Top secret
 */
-const images = []
+
 const cardDisplay = document.createElement("div")
 cardDisplay.textContent ="Phrase Card"
 cardDisplay.classList.add("w-50", "text-center" )// "border", "border-success-subtle"
 game.prepend(cardDisplay)
 
-// function to hide phrase card 
-const cards = document.querySelectorAll(".card");
-const cardSelected = cards[0];
-function hideCards(selectedCard) {
-
-    cards.forEach(card => {
-        if(card != selectedCard){
-            card.style.display = 'none';
-        } else{
-            card.style.display = 'block';
-        }
-       
-    });
-}
-hideCards(cardSelected);
 
 const userInput = document.createElement("input");
 userInput.classList.add("form-control", "bg-success-subtle", "w-50");
@@ -103,13 +88,33 @@ const hint = document.createElement("p")
 const result = document.createElement("p")
 let guessNum = 6;
 hint.textContent = "hint";
-// result.textContent = "good job"
+result.textContent = "good job"
 
 game.appendChild(userInput)
 game.appendChild(hint)
 game.appendChild(result)
 
-// const card1 = getElementById("card1");
+// function to hide phrase card 
+const cards = document.querySelectorAll(".card");
+// const cardSelected = cards[0];
+let cardIndex = 0;
+function hideCards() {
+
+    cards.forEach(card => {
+        card.style.display = 'none';
+    });
+
+    cards[cardIndex].style.display = 'block';
+    if(cardIndex < cards.length){
+        cardIndex ++
+    }else{
+        cardIndex = 0;
+    }
+}
+hideCards();
+
+
+
 
 // check guess is correrct
 const phrase = "answer"
@@ -130,7 +135,12 @@ function guessPhrase(){
             result.textContent = "Sorry you have reached max attemps"
         }else{
             // console.log(`getting closer. you have ${guessNum} guess left`);
-            result.textContent = `getting closer. you have ${guessNum} guess left`
+            if(guessNum == 4){
+                // hint.style.display = "block"
+                result.textContent = `getting closer. you have ${guessNum} guess left`
+            }else{
+                result.textContent = `getting closer. you have ${guessNum} guess left`
+            }
         }
     }
     userInput.value = ""
@@ -141,3 +151,5 @@ userInput.addEventListener("keypress", function(e){
         guessPhrase();
     }
 })
+
+
