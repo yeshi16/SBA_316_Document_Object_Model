@@ -99,4 +99,29 @@ const userInput = document.createElement("input");
 userInput.classList.add("form-control", "bg-success-subtle", "w-50");
 userInput.setAttribute("type", "text");
 userInput.placeholder = "Type your phrase";
+const hint = document.createElement("p")
+const result = document.createElement("p")
 game.appendChild(userInput)
+
+// const card1 = getElementById("card1");
+
+// check guess is correrct
+const phrase = "answer"
+function checkGuess(userGuess){
+   return userGuess == phrase
+}
+
+function guessPhrase(){
+    const userGuess = userInput.value;
+
+    if(checkGuess(userGuess)){
+        console.log("congragualtion you guessed the phrase")
+    }else{
+        guessNum --;
+        if(guessNum == 0){
+            console.log(`getting closer. you have ${guessNum} guess left`)
+
+        }
+    }
+}
+// console.log("Sorry you have reached max attemps")
