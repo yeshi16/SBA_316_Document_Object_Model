@@ -76,7 +76,7 @@ return dropdown.options[randomIndex].value
 const images = []
 const cardDisplay = document.createElement("div")
 cardDisplay.textContent ="Phrase Card"
-cardDisplay.classList.add("w-50", "border", "border-success-subtle")
+cardDisplay.classList.add("w-50", "text-center" )// "border", "border-success-subtle"
 game.prepend(cardDisplay)
 
 // function to hide phrase card 
