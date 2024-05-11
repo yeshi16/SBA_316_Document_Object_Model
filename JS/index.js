@@ -11,8 +11,7 @@ nameLabel.classList.add("form-label");
 nameInput.classList.add("form-control", "bg-success-subtle", "w-50");
 nameLabel.setAttribute("for", "username");
 nameInput.setAttribute("id", "username");
-nameInput.setAttribute("type", "text");
-nameInput.required = true;
+nameInput.setAttribute("required", "true");
 nameInput.placeholder = "Type your name here";
 nameLabel.textContent = "Name";
 selectLabel.textContent = "Which animal represents you";
@@ -57,6 +56,17 @@ game.appendChild(hint)
 game.appendChild(result)
 game.style.display = "none"
 
+//validate name 
+function valUsername() {
+    let username = nameInput.value;
+    //The username cannot be blank.
+    if (username == "") {
+        alert("Pleas add your name");
+       nameInput.focus();
+      return false;
+    }
+    return true;
+}  
 
 // function for selecting emoji randomly if user doesnt select
 function selectEmoji() {
@@ -76,6 +86,7 @@ function selectEmoji() {
 
 // event handler to dispaly name and emoji
 startGame.addEventListener("click", function () {
+    if (valUsername()) {
     const display = document.createElement("div");
     userInfo.style.display = "none";
     let name = nameInput.value;
@@ -84,7 +95,7 @@ startGame.addEventListener("click", function () {
     result.textContent = `Lets get started ${emoji}`;
     game.prepend(display)
     game.style.display = "block"
-
+    }
 })
 
 
@@ -161,11 +172,11 @@ function guessPhrase() {
             hideCards();
             result.textContent = `${selectEmoji()} lets try the next phrase`
             userInput.disabled = false;
-        }, 3000);
+        }, 4000);
     } else {
         guessNum--;
         if (guessNum == 0) {
-            result.textContent = "Sorry you have reached max attemps"
+            result.textContent = `Sorry you have reached max attemps. Your phrase was ${userGuess}`
             hint.textContent = `The phrase is: ${phraseCards[cardIndex].phrase}`;
             userInput.disabled = true;
             setTimeout(() => {
@@ -174,7 +185,7 @@ function guessPhrase() {
                 hideCards();
                 result.textContent = `${selectEmoji()} lets try the next phrase`
                 userInput.disabled = false;
-            }, 3000);
+            }, 4000);
 
         } else {
 
