@@ -55,11 +55,28 @@ game.appendChild(userInput)
 game.appendChild(hint)
 game.appendChild(result)
 game.style.display = "none"
+const cards = document.querySelectorAll(".card");
+let cardIndex = 0;
+// array of phrase card phrase and hint
+const phraseCards = [
+    { card: cards[0], phrase: 'for once in my life', hint: 'four, life' },
+    { card: cards[1], phrase: 'forget it', hint: 'four' },
+    { card: cards[2], phrase: 'try to understand', hint: 'understand' },
+    { card: cards[3], phrase: 'travel overseas', hint: 'over, sea' },
+    { card: cards[4], phrase: 'breakfast', hint: 'break' },
+    { card: cards[5], phrase: 'downtown', hint: 'down' },
+    { card: cards[6], phrase: 'eyeshadow', hint: 'shadow' },
+    { card: cards[7], phrase: 'stepfather', hint: 'steps' },
+    { card: cards[8], phrase: 'once upon a time', hint: 'time' },
+    { card: cards[9], phrase: 'potatoes', hint: "o's" },
+    { card: cards[10], phrase: '3d movie', hint: '3' },
+    { card: cards[11], phrase: 'top secret', hint: 'top' }
+
+]
 
 //validate name 
 function valUsername() {
     let username = nameInput.value;
-    //The username cannot be blank.
     if (username == "") {
         alert("Pleas add your name");
        nameInput.focus();
@@ -95,31 +112,12 @@ startGame.addEventListener("click", function () {
     result.textContent = `Lets get started ${emoji}`;
     game.prepend(display)
     game.style.display = "block"
+    userInput.focus();
     }
 })
 
 
 // function to hide phrase card 
-const cards = document.querySelectorAll(".card");
-
-// array of phrase card phrase and hint
-const phraseCards = [
-    { card: cards[0], phrase: 'for once in my life', hint: 'four, life' },
-    { card: cards[1], phrase: 'forget it', hint: 'four' },
-    { card: cards[2], phrase: 'try to understand', hint: 'understand' },
-    { card: cards[3], phrase: 'travel overseas', hint: 'over, sea' },
-    { card: cards[4], phrase: 'breakfast', hint: 'break' },
-    { card: cards[5], phrase: 'downtown', hint: 'down' },
-    { card: cards[6], phrase: 'eyeshadow', hint: 'shadow' },
-    { card: cards[7], phrase: 'stepfather', hint: 'steps' },
-    { card: cards[8], phrase: 'once upon a time', hint: 'time' },
-    { card: cards[9], phrase: 'potatoes', hint: "o's" },
-    { card: cards[10], phrase: '3d movie', hint: '3' },
-    { card: cards[11], phrase: 'top secret', hint: 'top' }
-
-]
-let cardIndex = 0;
-
 function hideCards() {
 
     cards.forEach((card, index) => {
@@ -172,6 +170,7 @@ function guessPhrase() {
             hideCards();
             result.textContent = `${selectEmoji()} lets try the next phrase`
             userInput.disabled = false;
+            userInput.focus();
         }, 4000);
     } else {
         guessNum--;
@@ -185,15 +184,16 @@ function guessPhrase() {
                 hideCards();
                 result.textContent = `${selectEmoji()} lets try the next phrase`
                 userInput.disabled = false;
+                userInput.focus();
             }, 4000);
 
         } else {
 
             if (guessNum == 4) {
                 displayHint(guessNum)
-                result.textContent = `Keep going ${selectEmoji()}. you have ${guessNum} guess left`
+                result.textContent = `Keep going ${selectEmoji()}. You have ${guessNum} guess left`
             } else {
-                result.textContent = `Getting closer ${selectEmoji()}. you have ${guessNum} guess left`
+                result.textContent = `Getting closer ${selectEmoji()}. You have ${guessNum} guess left`
             }
         }
     }
